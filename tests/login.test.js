@@ -1,10 +1,11 @@
 import http, { head } from 'k6/http';
 import { sleep, check } from 'k6';
+const postLogin = JSON.parse(open('../fixtures/postLogin.json')); // Importando o arquivo JSON com os dados de login
 
 /*
-// Configurações do teste por interação
-// Aqui definimos quantas iterações serão feitas e os limites de performance
-// Por exemplo, podemos definir que 90% das requisições devem ser concluídas em
+Configurações do teste por interação
+Aqui definimos quantas iterações serão feitas e os limites de performance
+Por exemplo, podemos definir que 90% das requisições devem ser concluídas em
 export const options = {
     iterations: 20, // Número de iterações de teste
     thresholds: {
@@ -42,10 +43,7 @@ export default () => {
     // Tudo que estiver aqui dentro será nosso teste
 
     const url = 'http://localhost:3000/login';
-    const payload = JSON.stringify({
-        username: 'Gustavo',
-        senha: '123456'
-    }); // Payload que será enviado no corpo da requisição
+    const payload = JSON.stringify(postLogin); // Payload que será enviado no corpo da requisição
 
     // Configuração do cabeçalho da requisição
     const params = {
