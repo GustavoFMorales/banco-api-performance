@@ -1,6 +1,7 @@
 import http, { head } from 'k6/http';
 import { sleep, check } from 'k6';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json')); // Importando o arquivo JSON com os dados de login
+import { baseUrl } from '../utils/variaveis.js'; // Importando a função baseUrl
 
 /*
 Configurações do teste por interação
@@ -42,7 +43,7 @@ export const options = {
 export default () => {
     // Tudo que estiver aqui dentro será nosso teste
 
-    const url = 'http://localhost:3000/login';
+    const url = `${baseUrl()}/login`; // Usando a função baseUrl para obter a URL base
     const payload = JSON.stringify(postLogin); // Payload que será enviado no corpo da requisição
 
     // Configuração do cabeçalho da requisição
