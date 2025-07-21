@@ -13,6 +13,7 @@ export const options = {
     }
 }; */
 
+/*
 // Configuração utilizando usuários virtuais
 export const options = {
     vus: 10, // Número de usuários virtuais
@@ -22,6 +23,19 @@ export const options = {
         http_req_failed: ['rate<0.01'], // Define que a taxa de falhas deve ser menor que 1%
     }
 
+};
+*/
+
+// Usuários virtuais utilizando stages
+// stage é uma forma de definir o número de usuários virtuais ao longo do tempo
+export const options = {
+    stages: [
+        { duration: '30s', target: 20 }, // Aumenta o número de usuários virtuais para 20 ao longo de 30 segundos
+        { duration: '1m30s', target: 10 }, // Mantém 10 usuários virtuais por 1 minuto e 30 segundos
+        { duration: '20s', target: 0 } // Reduz o número de usuários virtuais para 0 ao longo de 20 segundos
+    ],
+    http_req_duration: ['p(90)<300', 'max<=200'], // Define um limite de 90% das requisições devem ser concluídas em menos de 300ms
+    http_req_failed: ['rate<0.01'], // Define que a taxa de falhas deve ser menor que 1%
 };
 
 export default () => {
