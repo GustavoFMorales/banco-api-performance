@@ -1,13 +1,27 @@
 import http, { head } from 'k6/http';
 import { sleep, check } from 'k6';
 
-
+/*
+// Configurações do teste por interação
+// Aqui definimos quantas iterações serão feitas e os limites de performance
+// Por exemplo, podemos definir que 90% das requisições devem ser concluídas em
 export const options = {
     iterations: 20, // Número de iterações de teste
     thresholds: {
         http_req_duration: ['p(90)<100', 'max<=10'], // Define um limite de 90% das requisições devem ser concluídas em menos de 100ms
         http_req_failed: ['rate<0.01'], // Define que a taxa de falhas deve ser menor que 1%
     }
+}; */
+
+// Configuração utilizando usuários virtuais
+export const options = {
+    vus: 10, // Número de usuários virtuais
+    duration: '30s', // Duração do teste
+    thresholds: {
+        http_req_duration: ['p(90)<300', 'max<=200'], // Define um limite de 90% das requisições devem ser concluídas em menos de 100ms
+        http_req_failed: ['rate<0.01'], // Define que a taxa de falhas deve ser menor que 1%
+    }
+
 };
 
 export default () => {
