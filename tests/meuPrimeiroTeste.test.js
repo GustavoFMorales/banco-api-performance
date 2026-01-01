@@ -6,5 +6,5 @@ export const options = {
 };
 export default function () {
     http.get('https://www.ideia2001.com.br');
-    sleep(1);
+    sleep(2);
 };
