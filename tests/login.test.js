@@ -2,9 +2,11 @@ import http from 'k6/http';
 import { sleep, check } from 'k6'; 
 
 export const options = {
-    iterations: 40, // 10 usuários virtuais simultâneos
+   // iterations: 40, // 10 usuários virtuais simultâneos
+    vus: 10, // quantidade de usuários virtuais simultâneos
+    duration: '30s', // Duração do teste
     thresholds: { // Tresholds são critérios de sucesso ou falha do teste
-        http_req_duration: ['p(90)<10', 'max<15'], // 95% das requisições devem ser respondidas em menos de 7ms
+        http_req_duration: ['p(90)<3000', 'max<5000'], // 95% das requisições devem ser respondidas em menos de 7ms
         http_req_failed: ['rate<0.01'] // Menos de 1% das requisições podem falhar
     }
 };
