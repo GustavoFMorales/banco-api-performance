@@ -1,7 +1,10 @@
 import http from "k6/http";
 import { sleep, check } from "k6";
+const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
+const postLogin2 = open('../fixtures/postLogin.json');
 
 export const options = {
+  
   // iterations: 40, // 10 usuários virtuais simultâneos
   // vus: 10, // quantidade de usuários virtuais simultâneos
   //duration: '30s', // Duração do teste
@@ -20,12 +23,10 @@ export const options = {
 };
 
 export default function () {
+  console.log(postLogin2);
   // Aqui será realizado os testes de login
   const url = "http://localhost:3000/login"; // url do endpoint de login
-  const payload = JSON.stringify({
-    username: "gustavo",
-    senha: "123456",
-  });
+  const payload = JSON.stringify(postLogin);
 
   // payload e params são enviados na requisição POST
 
