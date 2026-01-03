@@ -2,7 +2,7 @@ import http from "k6/http";
 import {sleep, check} from 'k6';
 import {obterTokenLogin} from '../helpers/autenticacao.js';
 const postTransferencias = JSON.parse(open('../fixtures/postTransferencias.json'));
-
+import { pegarBaseUrl } from "../utils/variaveis.js";
 
 export const options = {
     stages: [
@@ -18,7 +18,7 @@ export const options = {
 export default function () {
     const token = obterTokenLogin(); // obtém o token de autenticação
 
-    const url = 'http://localhost:3000/transferencias';
+    const url = `${pegarBaseUrl()}/transferencias`; // Variável de ambiente para a URL bade
     const payload = JSON.stringify(postTransferencias);
 
     const params  = {
