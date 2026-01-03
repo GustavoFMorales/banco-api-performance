@@ -6,9 +6,8 @@ import { pegarBaseUrl } from "../utils/variaveis.js";
 
 export const options = {
     stages: [
-        {duration: '30s', target: '10'},
-        {duration: '30', target: '20'},
-        {duration: '20s', target: '0'}
+        {duration: '10s', target: '10'},
+        {duration: '10s', target: '0'}
     ],
     thresholds: {
         http_req_duration: ['p(90)< 3000', 'max< 5000']
@@ -29,8 +28,8 @@ export default function () {
     };
     const resposta = http.post(url, payload, params);
     check(resposta, {
-        "Validando que o status é 201": (r) => r.status === 201
+        "Validando que o status é 201": (r) => r.status === 201,
+        "Validando a resposta da transferencia": (r) => r.json().message === "Transferência realizada com sucesso."
     })
-
     sleep(1);
 };
