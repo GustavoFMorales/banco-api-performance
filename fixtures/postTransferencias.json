@@ -1,6 +1,6 @@
 {
-    "contaOrigem": 1,
-    "contaDestino": 2,
-    "valor": 10,
+    "contaOrigem": 2,
+    "contaDestino": 3,
+    "valor": 500,
     "token": "seu_token_aqui"
 }
